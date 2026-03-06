@@ -80,8 +80,10 @@ return {
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+      -- Sett capabilities globalt for alle servere
+      vim.lsp.config("*", { capabilities = capabilities })
 
       -- Keymaps som aktiveres når en LSP kobler til
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -128,8 +130,7 @@ return {
       })
 
       -- ─── TypeScript / JavaScript ───────────────────────────────────────────
-      lspconfig.ts_ls.setup({
-        capabilities = capabilities,
+      vim.lsp.config("ts_ls", {
         filetypes = {
           "javascript", "javascriptreact",
           "typescript", "typescriptreact",
@@ -156,8 +157,7 @@ return {
       })
 
       -- ─── Python ───────────────────────────────────────────────────────────
-      lspconfig.pyright.setup({
-        capabilities = capabilities,
+      vim.lsp.config("pyright", {
         settings = {
           python = {
             analysis = {
@@ -171,8 +171,7 @@ return {
       })
 
       -- ─── CSS ──────────────────────────────────────────────────────────────
-      lspconfig.cssls.setup({
-        capabilities = capabilities,
+      vim.lsp.config("cssls", {
         settings = {
           css  = { validate = true, lint = { unknownAtRules = "ignore" } },
           scss = { validate = true, lint = { unknownAtRules = "ignore" } },
@@ -181,14 +180,12 @@ return {
       })
 
       -- ─── HTML ─────────────────────────────────────────────────────────────
-      lspconfig.html.setup({
-        capabilities = capabilities,
+      vim.lsp.config("html", {
         filetypes = { "html", "htmldjango", "handlebars" },
       })
 
       -- ─── TailwindCSS ──────────────────────────────────────────────────────
-      lspconfig.tailwindcss.setup({
-        capabilities = capabilities,
+      vim.lsp.config("tailwindcss", {
         filetypes = {
           "html", "css", "scss",
           "javascript", "javascriptreact",
@@ -209,8 +206,7 @@ return {
       })
 
       -- ─── Emmet (HTML/JSX snippets) ────────────────────────────────────────
-      lspconfig.emmet_ls.setup({
-        capabilities = capabilities,
+      vim.lsp.config("emmet_ls", {
         filetypes = {
           "html", "css", "scss",
           "javascriptreact", "typescriptreact",
@@ -219,6 +215,9 @@ return {
           html = { options = { ["bem.enabled"] = true } },
         },
       })
+
+      -- Aktiver alle konfigurerte servere
+      vim.lsp.enable({ "ts_ls", "pyright", "cssls", "html", "tailwindcss", "emmet_ls" })
     end,
   },
 }
