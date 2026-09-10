@@ -104,7 +104,7 @@ return {
           map("n", "<leader>ws", vim.lsp.buf.workspace_symbol, vim.tbl_extend("force", opts, { desc = "Workspace symboler" }))
           map("n", "[d",         vim.diagnostic.goto_prev,     vim.tbl_extend("force", opts, { desc = "Forrige diagnostikk" }))
           map("n", "]d",         vim.diagnostic.goto_next,     vim.tbl_extend("force", opts, { desc = "Neste diagnostikk" }))
-          map("n", "<leader>e",  vim.diagnostic.open_float,    vim.tbl_extend("force", opts, { desc = "Åpne diagnostikk float" }))
+          map("n", "<leader>d",  vim.diagnostic.open_float,    vim.tbl_extend("force", opts, { desc = "Åpne diagnostikk float" }))
           map("n", "<leader>q",  vim.diagnostic.setloclist,    vim.tbl_extend("force", opts, { desc = "Diagnostikk liste" }))
         end,
       })
